@@ -12,3 +12,4 @@ To use the program, place YouTube links in a text file inside the `data` folder.
 
 The program will read that file and download/convert each link to an MP3.
 To use the program execute the main.py file.
+Also, it works with youtube links and youtube music links.
