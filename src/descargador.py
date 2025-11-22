@@ -1,11 +1,13 @@
 from pytubefix import YouTube
 from typing import NamedTuple
+from liampia_nombre import *
 
 Cancion = NamedTuple("Cancion", [("titulo", str), ("autor", str), ("ruta", str), ("titulo_mp3", str)])
 
 def descargar(url: str, carpeta: str) -> Cancion:
     yt = YouTube(url)
-    tittle = f"{yt.title}"
+    tittle_original = f"{yt.title}"
+    tittle = limpiar_nombre(tittle_original)
     author = yt.author
     # Creamos el stream de audio
     stream_audio = yt.streams.filter(only_audio=True).first()
