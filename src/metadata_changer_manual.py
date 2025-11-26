@@ -20,6 +20,8 @@ def main():
 
             # Pedimos metadatos al usuario
             artista = input("Autor/Artista (deja vacío para no cambiar): ").strip()
+            titulo = input("Título: ")
+            album = input("Albúm: ")
 
             # Abrimos el archivo MP3
             try:
@@ -34,6 +36,10 @@ def main():
                 # Guardamos solo lo que pida el usuario
                 if artista:
                     tags["artist"] = artista
+                if titulo:
+                    tags["title"] = titulo
+                if album:
+                    tags["album"] = album
                 tags.save()
                 print("Metadatos guardados correctamente.")
 

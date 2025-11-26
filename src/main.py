@@ -5,22 +5,22 @@ from metadata_changer import *
 import os
 
 def main():
-    ruta = r"data\urls.txt"
+    ruta = r"data\urls.csv"
     carpeta = "downloads"
     print("Extrayendo URLs del archivo txt.")
-    enlaces = leer_url(ruta)
-    for enlace in enlaces:
-        datos_cancion = descargar(enlace,carpeta)
+    canciones = leer_url(ruta)
+    for cancion in canciones:
+        rutas = descargar(cancion.url,carpeta,cancion.titulo)
 
-        print(f"Convertiendo {datos_cancion.titulo} a mp3...")
-        convertir(carpeta, datos_cancion.titulo)
+        print(f"Convertiendo {cancion.titulo} a mp3...")
+        convertir(carpeta, cancion.titulo)
         print("Convertido con éxito")
 
         print("Eliminando el archivo .webm")
-        os.remove(datos_cancion.ruta)      
+        os.remove(rutas.webm)      
 
         print("Editando metadatos de la canción...")
-        cambiar_metadata(carpeta, datos_cancion.titulo_mp3, datos_cancion.autor)
+        cambiar_metadata(carpeta, rutas.mp3, cancion.titulo, cancion.autor, cancion.album)
         
 
 

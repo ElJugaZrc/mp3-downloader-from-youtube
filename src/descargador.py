@@ -2,19 +2,16 @@ from pytubefix import YouTube
 from typing import NamedTuple
 from liampia_nombre import *
 
-Cancion = NamedTuple("Cancion", [("titulo", str), ("autor", str), ("ruta", str), ("titulo_mp3", str)])
+Rutas = NamedTuple("Rutas", [("mp3", str), ("webm", str)])
 
-def descargar(url: str, carpeta: str) -> Cancion:
+def descargar(url: str, carpeta: str, titulo: str) -> Rutas:
     yt = YouTube(url)
-    tittle_original = f"{yt.title}"
-    tittle = limpiar_nombre(tittle_original)
-    author = yt.author
     # Creamos el stream de audio
     stream_audio = yt.streams.filter(only_audio=True).first()
     print("Iniciando descarga:")
     try:
-        ruta_webm = stream_audio.download(output_path=carpeta,filename=tittle)
-        print(f"Descarga completada con éxito! Audio descargado: {tittle}")
-        return Cancion(tittle, author, ruta_webm, f"{tittle}.mp3")
+        ruta_webm = stream_audio.download(output_path=carpeta,filename=titulo)
+        print(f"Descarga completada con éxito! Audio descargado: {titulo}")
+        return Rutas(f"{titulo}.mp3", ruta_webm)
     except Exception as e:
-        print(f"Ha ocurrido un error mientras se realizaba la descarga: ")
+        print(f"Ha ocurrido un error mientras se realizaba la descarga: {e}")
